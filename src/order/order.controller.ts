@@ -21,8 +21,11 @@ export class OrderController {
   ) {}
 
   @Post()
-  create(@Body() createOrderDto: CreateOrderDto) {
-    return this.orderService.create(createOrderDto);
+  async create(@Body() createOrderDto: CreateOrderDto) {
+    const newOrder = await this.orderService.create(createOrderDto);
+    console.log('Order sent to inventory for processing');
+    this.inventoryService.emit('order_created', newOrder);
+    return newOrder;
   }
 
   @Get()

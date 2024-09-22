@@ -26,7 +26,7 @@ async function bootstrap() {
         queue: 'order_queue',
         noAck: false,
         queueOptions: {
-          durable: false,
+          durable: true,
         },
       },
     },
